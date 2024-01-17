@@ -1,17 +1,17 @@
 import express, {json, urlencoded} from "express";
+import { RegisterController } from "./controllers/RegisterController";
 
 export class Server {
-  static run(port: number) {
+  static run(port: number, registerController: RegisterController) {
     const app = express();
 
     app.use(json());
     app.use(urlencoded({extended: true}));
 
 
-    app.get("api/auth", (req, res) => {
-      res.send("Auth Service");
-    });
+    app.get("/api/auth", (req, res) => res.send("Hello World!"));
 
+    app.post("/api/auth/register", (req, res) => registerController.handle(req, res));
 
 
     app.listen(port, () => {
