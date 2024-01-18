@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { Register } from "../../application/use-cases/Register";
 import { User } from "../../domain/entities/UserEntity";
+import { ValidationError } from "../../shared/errors/ValidationError";
+import { BadRequestError } from "../../shared/errors/BadRequestError";
 
 class RegisterUserDto {
   constructor(private readonly userId: string) {}
@@ -17,11 +19,12 @@ export class RegisterController {
       const response = new RegisterUserDto(result.userId);
       res.status(201).send(response);
     } catch (err) {
-      if (err instanceof Error) {
-        if (err.message === "Validation failed")
-          return res.status(422).send("Validation failed");
+      if (err instanceof ValidationError) {
+        return res.status(422).send("Validation failed");
+      } else if (err instanceof BadRequestError) {
         return res.status(400).send("User Already Exist");
       }
+      return res.status(500).send(err);
     }
   }
 }
