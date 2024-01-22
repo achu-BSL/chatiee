@@ -1,18 +1,21 @@
 import express, {json, urlencoded} from "express";
 import { RegisterController } from "./controllers/RegisterController";
+import cors from 'cors';
+import { LoginController } from "./controllers/LoginController";
 
 export class Server {
-  static run(port: number, registerController: RegisterController) {
+  static run(port: number, registerController: RegisterController, loginController: LoginController) {
     const app = express();
 
     app.use(json());
     app.use(urlencoded({extended: true}));
+    app.use(cors({origin: 'http://localhost:3000', credentials: true}));
 
 
     app.get("/api/auth", (req, res) => res.send("Hello World!"));
 
     app.post("/api/auth/register", (req, res) => registerController.handle(req, res));
-
+    app.post('/api/auth/login', (req, res) => loginController.handle(req, res));
 
     app.listen(port, () => {
         console.log(

@@ -17,14 +17,16 @@ export class RegisterController {
     try {
       const result = await this.register.execute(user);
       const response = new RegisterUserDto(result.userId);
+      console.log("[Register Controll]: Register Success [response]", response);
       res.status(201).send(response);
     } catch (err) {
       if (err instanceof ValidationError) {
-        return res.status(422).send("Validation failed");
+        return res.status(422).json({ msg: "Validation failed" });
       } else if (err instanceof BadRequestError) {
-        return res.status(400).send("User Already Exist");
+        return res.status(400).send({ msg: "User Already Exist" });
       }
-      return res.status(500).send(err);
+      console.log(err);
+      return res.status(500).json(err);
     }
   }
 }

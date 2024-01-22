@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 
 export class UserRepository implements IUserRepository {
   async save(user: User) {
-    const hashedPassword = bcrypt.hash(user.password, 10);
+    const hashedPassword = await bcrypt.hash(user.password, 10);
     const { username, email, _id } = await userModel.create({
       ...user,
       password: hashedPassword,
@@ -20,7 +20,7 @@ export class UserRepository implements IUserRepository {
     return new User(
       mongoUser.username,
       mongoUser.email,
-      "x",
+      mongoUser.password,
       mongoUser._id.toString()
     );
   }
@@ -31,7 +31,7 @@ export class UserRepository implements IUserRepository {
     return new User(
       mongoUser.username,
       mongoUser.email,
-      "x",
+      mongoUser.password,
       mongoUser._id.toString()
     );
   }
