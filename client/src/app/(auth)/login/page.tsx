@@ -1,8 +1,34 @@
+'use client'
+
 import Link from "next/link";
+import { FormEvent } from "react";
 
 export default function Login() {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    const submitHandler = () => {}
+    const formData = new FormData(e.currentTarget);
+    const body = {
+      username: formData.get('username'),
+      password: formData.get('password')
+    }
+
+    const response = await fetch("http://chatiee.dev/api/auth/login", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+      credentials: 'include'
+    });
+
+    if (response.ok) {
+      console.log("Loggin success");
+    } else {
+      console.log("ERR");
+      console.log(await response.json());
+    }
+  };
 
   return (
     <div className="relative flex justify-center items-center bg-gray-300 min-h-screen px-2">
@@ -18,33 +44,41 @@ export default function Login() {
           </p>
         </div>
         <div className="flex-1 flex flex-col gap-3 justify-evenly">
-          <div className="flex-1 flex flex-col gap-3 justify-center">
-            <div className="py-2">
-              <input
-                placeholder="Username"
-                className="w-full text-black py-2 px-4 ring-red-200 ring-2 rounded-md backdrop-blur-sm opacity-90 focus:outline-red-400"
-              />
+          <form onSubmit={submitHandler}>
+            <div className="flex-1 flex flex-col gap-3 justify-center">
+              <div className="py-2">
+                <input
+                  name="username"
+                  placeholder="Username"
+                  className="w-full text-black py-2 px-4 ring-red-200 ring-2 rounded-md backdrop-blur-sm opacity-90 focus:outline-red-400"
+                />
+              </div>
+              <div className="py-2">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="w-full text-black py-2 px-4 ring-red-200 ring-2 rounded-md backdrop-blur-sm opacity-90 focus:outline-red-400"
+                />
+              </div>
             </div>
-            <div className="py-2">
-              <input
-                placeholder="Password"
-                className="w-full text-black py-2 px-4 ring-red-200 ring-2 rounded-md backdrop-blur-sm opacity-90 focus:outline-red-400"
-              />
+            <div>
+              <button className="bg-[#ff0700] py-2 rounded-lg w-full">
+                Login
+              </button>
             </div>
-          </div>
-          <div>
-            <button className="bg-[#ff0700] py-2 rounded-lg w-full">
-              Register
-            </button>
-          </div>
-          <div className="py-4 text-black">
-            <p className="text-center">
-              Create Account?{" "}
-              <Link className="font-semibold text-blue-600" href={"/register"}>
-                Register
-              </Link>
-            </p>
-          </div>
+            <div className="py-4 text-black">
+              <p className="text-center">
+                Create Account?{" "}
+                <Link
+                  className="font-semibold text-blue-600"
+                  href={"/register"}
+                >
+                  Register
+                </Link>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>
