@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@achubsl-chatiee/common':
+    specifier: ^1.0.1
+    version: 1.0.1
   '@types/bcrypt':
     specifier: ^5.0.2
     version: 5.0.2
@@ -43,6 +46,10 @@ dependencies:
     version: 5.3.3
 
 packages:
+
+  /@achubsl-chatiee/common@1.0.1:
+    resolution: {integrity: sha512-KqL1JkiI/ukyrn7ctxbFaYQOqsm1nyzdYSTEOvHmjQ7ldGigzN5pgK/FQ88ynaWlXykC6jbbTIs8wa4iT1JpPQ==}
+    dev: false
 
   /@cspotcode/source-map-support@0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}

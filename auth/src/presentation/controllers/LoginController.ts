@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { Login } from "../../application/use-cases/Login";
 import { User } from "../../domain/entities/UserEntity";
-import { ValidationError } from "../../shared/errors/ValidationError";
-import { BadRequestError } from "../../shared/errors/BadRequestError";
+import { BadRequestError, ValidationError } from "@achubsl-chatiee/common";
+
 
 export class LoginController {
   constructor(private login: Login) {}

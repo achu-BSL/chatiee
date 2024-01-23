@@ -1,8 +1,6 @@
 import { User } from "../../domain/entities/UserEntity";
 import { UserRepository } from "../../infrastructure/repositories/UserRepository";
-import { BadRequestError } from "../../shared/errors/BadRequestError";
-import { ValidationError } from "../../shared/errors/ValidationError";
-
+import { BadRequestError, ValidationError } from "@achubsl-chatiee/common";
 export class Register {
   constructor(private readonly userRepo: UserRepository) {}
   /**

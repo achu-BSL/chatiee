@@ -7,6 +7,7 @@ export class Server {
   static run(port: number, registerController: RegisterController, loginController: LoginController) {
     const app = express();
 
+
     app.use(json());
     app.use(urlencoded({extended: true}));
     app.use(cors({origin: 'http://localhost:3000', credentials: true}));
