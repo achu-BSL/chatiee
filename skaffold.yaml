@@ -16,3 +16,19 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    # - image: achubsl/client
+    #   context: client
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: 'src/**/*.ts'
+    #         dest: .
+    - image: achubsl/personalchat-chatiee
+      context: personalChat
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
