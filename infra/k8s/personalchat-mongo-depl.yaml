@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personalchat-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: personalchat-mongo
+  template:
+    metadata:
+      labels:
+        app: personalchat-mongo
+    spec:
+      containers:
+        - name: personalchat-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: personalchat-mongo-srv
+spec:
+  selector:
+    app: personalchat-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
