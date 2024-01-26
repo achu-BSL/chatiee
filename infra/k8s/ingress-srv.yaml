@@ -17,6 +17,13 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
+          - path: /api/chat/
+            pathType: Prefix
+            backend:
+              service:
+                name: personalchat-srv
+                port:
+                  number: 3001
           # - path: /?(.*)
           #   pathType: Prefix
           #   backend:
