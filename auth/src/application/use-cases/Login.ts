@@ -16,10 +16,8 @@ export class Login {
 
     const mongoUser = await this.userRepo.findUserByUsername(username);
     if (!mongoUser) throw new BadRequestError("User not found");
-    console.log("found");
 
     const passwordMatch = await bcrypt.compare(password, mongoUser.password);
-    console.log(password, mongoUser.password);
     if (!passwordMatch) throw new BadRequestError("Password mismatch");
 
     const secret = process.env.JWT_KEY!;
