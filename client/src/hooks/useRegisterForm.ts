@@ -1,6 +1,6 @@
 import {
   extractValuesFromFormData,
-  loginRequest,
+  registerRequest,
 } from "@/helper/registerFromHelper";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
@@ -14,7 +14,7 @@ export const useRegisterForm = () => {
     const formData = new FormData(e.currentTarget);
     const body = extractValuesFromFormData(formData);
 
-    const res = await loginRequest(body);
+    const res = await registerRequest(body);
     if (res.ok) {
       router.push("/login");
     } else {

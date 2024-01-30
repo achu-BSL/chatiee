@@ -6,7 +6,7 @@ export const extractValuesFromFormData = (formData: FormData) => {
   };
 };
 
-export const loginRequest = async (body: {
+export const registerRequest = async (body: {
   username: string;
   password: string;
   email: string;
