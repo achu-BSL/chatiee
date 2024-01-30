@@ -1,41 +1,9 @@
 "use client";
-
+import { useRegisterForm } from "@/hooks/useRegisterForm";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
 
 export default function Register() {
-
-  const router = useRouter();
-
-
-  const formSumbmitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const body = {
-      username: formData.get("username"),
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
-
-    const res = await fetch("http://chatiee.dev/api/auth/register", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(body),
-    });
-
-    if (res.ok) {
-      console.log("Register successfully");
-      router.push("/login")
-      
-    } else {
-      console.log("Error try again later.");
-    }
-  };
-
+  const { formSumbmitHandler } = useRegisterForm();
   return (
     <div className="relative flex justify-center items-center bg-gray-300 min-h-screen px-2">
       <div className="absolute bg-orange-300 rounded-full w-40 h-40 -top-6 right-0 filter blur-2xl opacity-30"></div>
