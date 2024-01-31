@@ -1,43 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent } from "react";
-import { useUser } from "@/store/useUser";
-import { useRouter } from "next/navigation";
+import { useLoginForm } from "@/hooks/useLoginForm";
 
 export default function Login() {
-  const updateUser = useUser((state) => state.updateUser);
-  const router = useRouter();
-
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const body = {
-      username: formData.get("username"),
-      password: formData.get("password"),
-    };
-
-    const response = await fetch("https://chatiee.dev/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      const data = (await response.json()) as {
-        data: { username: string; token: string };
-      };
-      updateUser(data.data);
-      router.push('/');
-    } else {
-      console.log("ERR");
-      console.log(await response.json());
-    }
-  };
+  const { submitHandler } = useLoginForm();
 
   return (
     <div className="relative flex justify-center items-center bg-gray-300 min-h-screen px-2">
