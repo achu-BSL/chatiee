@@ -1,10 +1,10 @@
-import connectDb from "./infrastructure/database/setup";
-import { Server } from "./presentation/Server"
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
-const main = async () => {
-    await connectDb();
-    Server.run(3001);
-};
-
-
-main();
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({ origin: 'http://localhost:3000' });
+  await app.listen(3001);
+  console.log('Running on port 3001');
+}
+bootstrap();
