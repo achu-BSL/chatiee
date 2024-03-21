@@ -1,0 +1,19 @@
+replicaCount: 1
+image:
+  repository: achubsl/personalchat-chatiee
+  pullPolicy: Always
+
+deployment:
+  name: personalchat-depl
+  podName: personalchat
+
+
+service:
+  name: personalchat-srv
+  type: ClusterIP
+  port: 80
+
+
+ingress:
+  name: ingress-personalchat
+  host: chatiee.dev
