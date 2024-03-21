@@ -1,0 +1,19 @@
+replicaCount: 1
+image:
+  repository: achubsl/auth
+  pullPolicy: Always
+
+deployment:
+  name: auth-depl
+  podName: auth
+
+
+service:
+  name: auth-srv
+  type: ClusterIP
+  port: 80
+
+
+ingress:
+  name: ingress-auth
+  host: chatiee.dev
