@@ -10,7 +10,7 @@ import {
 import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({ cors: { origin: 'http://localhost:3000' } })
-export class ChatService implements OnGatewayConnection, OnGatewayDisconnect {
+export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer() server: Server;
 
   handleConnection(client: Socket) {
